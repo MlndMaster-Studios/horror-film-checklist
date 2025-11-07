@@ -81,3 +81,27 @@ footer {
   color: var(--muted);
   font-size: 0.9rem;
 }
+
+/* Toggle button and checkbox styling */
+.toggle-btn {
+  background: var(--accent);
+  color: var(--text);
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.7rem 1.5rem;
+  margin: 1rem auto;
+  display: block;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.toggle-btn:hover {
+  background: #b20610;
+  transform: scale(1.03);
+}
+
+.movie-checkbox {
+  margin-right: 10px;
+  accent-color: var(--accent);
+}
