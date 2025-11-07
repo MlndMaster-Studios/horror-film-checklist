@@ -1,6 +1,7 @@
 // script.js
 // 🎃 Liam's Ultimate Horror & Thriller Master List (2025 Edition)
-// Each movie item opens its IMDb page in a new tab when clicked.
+// Click titles to open IMDb pages. Check a box to mark as finished (hides movie).
+// Use the toggle button at the top to show/hide finished films.
 
 document.addEventListener("DOMContentLoaded", () => {
   const sections = {
@@ -13,13 +14,11 @@ document.addEventListener("DOMContentLoaded", () => {
       "Scream VI (2023)": "https://www.imdb.com/title/tt17663992/",
       "Scream VII (2026)": "https://www.imdb.com/title/tt32536493/"
     },
-
     "Fear Street Trilogy": {
       "Fear Street Part One: 1994 (2021)": "https://www.imdb.com/title/tt6566576/",
       "Fear Street Part Two: 1978 (2021)": "https://www.imdb.com/title/tt9701940/",
       "Fear Street Part Three: 1666 (2021)": "https://www.imdb.com/title/tt9701942/"
     },
-
     "Halloween Franchise": {
       "Halloween (1978)": "https://www.imdb.com/title/tt0077651/",
       "Halloween II (1981)": "https://www.imdb.com/title/tt0082495/",
@@ -31,8 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "Halloween Kills (2021)": "https://www.imdb.com/title/tt10665338/",
       "Halloween Ends (2022)": "https://www.imdb.com/title/tt10665342/"
     },
-
-    "A Nightmare on Elm Street": {
+     "A Nightmare on Elm Street": {
       "A Nightmare on Elm Street (1984)": "https://www.imdb.com/title/tt0087800/",
       "A Nightmare on Elm Street 2: Freddy’s Revenge (1985)": "https://www.imdb.com/title/tt0089686/",
       "A Nightmare on Elm Street 3: Dream Warriors (1987)": "https://www.imdb.com/title/tt0093629/",
@@ -177,24 +175,76 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+
   const listContainer = document.getElementById("wishlist");
-  for (const [section, movies] of Object.entries(sections)) {
-    const sectionDiv = document.createElement("div");
-    sectionDiv.className = "section";
 
-    const header = document.createElement("h2");
-    header.textContent = section;
-    sectionDiv.appendChild(header);
+  // Create toggle button
+  const toggleBtn = document.createElement("button");
+  toggleBtn.textContent = "Show Finished Movies";
+  toggleBtn.className = "toggle-btn";
+  document.body.insertBefore(toggleBtn, listContainer);
 
-    const ul = document.createElement("ul");
-    for (const [title, link] of Object.entries(movies)) {
-      const li = document.createElement("li");
-      li.textContent = title;
-      li.addEventListener("click", () => window.open(link, "_blank"));
-      ul.appendChild(li);
-    }
+  let showFinished = false;
 
-    sectionDiv.appendChild(ul);
-    listContainer.appendChild(sectionDiv);
+  // Load hidden movies from localStorage
+  const hiddenMovies = JSON.parse(localStorage.getItem("hiddenMovies")) || {};
+
+  function saveHiddenMovies() {
+    localStorage.setItem("hiddenMovies", JSON.stringify(hiddenMovies));
   }
+
+  function renderList() {
+    listContainer.innerHTML = "";
+
+    for (const [section, movies] of Object.entries(sections)) {
+      const sectionDiv = document.createElement("div");
+      sectionDiv.className = "section";
+
+      const header = document.createElement("h2");
+      header.textContent = section;
+      sectionDiv.appendChild(header);
+
+      const ul = document.createElement("ul");
+
+      for (const [title, link] of Object.entries(movies)) {
+        const li = document.createElement("li");
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "movie-checkbox";
+
+        const movieId = `${section}::${title}`;
+        checkbox.checked = hiddenMovies[movieId] || false;
+
+        const span = document.createElement("span");
+        span.textContent = title;
+        span.addEventListener("click", () => window.open(link, "_blank"));
+
+        checkbox.addEventListener("change", () => {
+          hiddenMovies[movieId] = checkbox.checked;
+          saveHiddenMovies();
+          renderList(); // re-render to hide/show
+        });
+
+        if (hiddenMovies[movieId] && !showFinished) continue;
+
+        li.appendChild(checkbox);
+        li.appendChild(span);
+        ul.appendChild(li);
+      }
+
+      sectionDiv.appendChild(ul);
+      listContainer.appendChild(sectionDiv);
+    }
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    showFinished = !showFinished;
+    toggleBtn.textContent = showFinished ? "Hide Finished Movies" : "Show Finished Movies";
+    renderList();
+  });
+
+  renderList();
 });
+
+
