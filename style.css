@@ -1,0 +1,129 @@
+/* ===== Base Layout ===== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(-45deg, #100018, #1e0030, #2a0050, #100018);
+  background-size: 400% 400%;
+  animation: gradientFlow 20s ease infinite;
+  color: #e8e8ff;
+  overflow-x: hidden;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+header {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+h1 span {
+  background: linear-gradient(270deg, #8b5cf6, #4f46e5, #0f172a);
+  background-size: 600% 600%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textGradient 8s ease infinite;
+}
+
+@keyframes textGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== Movie Sections ===== */
+.section {
+  margin: 2rem auto;
+  max-width: 900px;
+}
+
+.section h2 {
+  margin-bottom: 1rem;
+  color: #c3c1ff;
+  text-shadow: 0 0 8px rgba(139, 92, 246, 0.25);
+}
+
+.movie-item {
+  display: flex;
+  align-items: center;
+  background: rgba(30, 41, 59, 0.55);
+  backdrop-filter: blur(12px) saturate(150%);
+  border-radius: 12px;
+  padding: 0.6rem 1rem;
+  margin: 0.4rem 0;
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  transition: all 0.25s ease;
+}
+
+.movie-item:hover {
+  box-shadow: 0 6px 14px rgba(139, 92, 246, 0.25);
+  border-color: rgba(139, 92, 246, 0.35);
+  transform: translateY(-3px);
+}
+
+.movie-item input[type="checkbox"] {
+  margin-right: 1rem;
+  transform: scale(1.3);
+  accent-color: #8b5cf6;
+}
+
+.movie-item label {
+  color: #e0d7ff;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.movie-item:hover label {
+  color: #fff;
+}
+
+/* ===== Button Styling ===== */
+#toggleFinishedBtn {
+  cursor: pointer;
+  background: linear-gradient(135deg, #8b5cf6, #4f46e5);
+  color: #fff;
+  font-weight: 500;
+  border-radius: 12px;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  transition: all 0.3s ease;
+  animation: buttonGradient 8s ease infinite;
+}
+
+@keyframes buttonGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+#toggleFinishedBtn:hover {
+  filter: brightness(1.15);
+  box-shadow: 0 5px 15px rgba(139,92,246,0.4);
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #8b5cf6, #4f46e5);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+/* ===== Footer ===== */
+.footer-note {
+  text-align: center;
+  margin: 2rem 0;
+  color: #bfbdf8;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
