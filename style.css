@@ -10,16 +10,19 @@
   --muted: #c3c1ff;
   --border: rgba(139, 92, 246, 0.25);
   --radius: 16px;
+  --checkbox-glow: rgba(139, 92, 246, 0.6);
 }
 
 /* Horror Theme */
 body.horror-theme {
-  --bg: linear-gradient(-45deg, #000000, #1a0000, #2a0000, #0a0000);
+  --bg: linear-gradient(135deg, #000000, #1a0000, #2a0000, #0a0000);
   --text: #f8e8e8;
   --card: rgba(60, 0, 0, 0.6);
   --accent: #e50914;
   --muted: #ffaaaa;
   --border: rgba(255, 0, 0, 0.3);
+  --checkbox-glow: rgba(229, 9, 20, 0.6);
+  animation: none;
 }
 
 /* =========================
@@ -35,6 +38,10 @@ body {
   animation: gradientFlow 20s ease infinite;
   color: var(--text);
   overflow-x: hidden;
+}
+
+body.horror-theme {
+  background-size: cover;
 }
 
 @keyframes gradientFlow {
@@ -150,6 +157,12 @@ footer {
   animation: buttonGradient 8s ease infinite;
 }
 
+body.horror-theme .toggle-btn {
+  background: linear-gradient(135deg, #800000, #b00000, #e50914);
+  animation: none;
+  box-shadow: 0 5px 20px rgba(229, 9, 20, 0.4);
+}
+
 @keyframes buttonGradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -165,8 +178,36 @@ footer {
    CHECKBOXES
    ========================= */
 .movie-checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 2px solid var(--accent);
+  background-color: transparent;
   margin-right: 10px;
-  accent-color: var(--accent);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  box-shadow: 0 0 0 transparent;
+}
+
+.movie-checkbox:checked {
+  background-color: var(--accent);
+  box-shadow: 0 0 10px var(--checkbox-glow);
+}
+
+.movie-checkbox:hover {
+  box-shadow: 0 0 6px var(--checkbox-glow);
+  transform: scale(1.1);
+}
+
+.movie-checkbox:checked::after {
+  content: "✔";
+  color: #fff;
+  font-size: 0.8rem;
+  position: absolute;
+  left: 3px;
+  top: -1px;
 }
 
 /* =========================
@@ -182,6 +223,32 @@ footer {
   border-radius: 3px;
 }
 
+body.horror-theme ::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #800000, #b00000, #e50914);
+}
+
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.2);
+}
+
+/* =========================
+   THEME ICON
+   ========================= */
+.theme-icon {
+  font-size: 1.2rem;
+  vertical-align: middle;
+  margin-right: 8px;
+  transition: all 0.3s ease;
+}
+
+/* Brand (default) theme */
+body:not(.horror-theme) .theme-icon {
+  color: #c084fc;
+  text-shadow: 0 0 10px rgba(192, 132, 252, 0.6);
+}
+
+/* Horror theme */
+body.horror-theme .theme-icon {
+  color: #ff1a1a;
+  text-shadow: 0 0 12px rgba(255, 26, 26, 0.8);
 }
