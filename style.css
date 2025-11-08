@@ -1,21 +1,46 @@
-/* style.css */
-/* Minimalist dark theme for the Horror & Thriller Master List */
-
+/* =========================
+   THEME VARIABLES
+   ========================= */
 :root {
-  --bg: #0e0e0e;
-  --card: #1a1a1a;
-  --text: #eaeaea;
-  --accent: #e50914;
-  --muted: #888;
-  --radius: 18px;
+  /* Brand Theme (default) */
+  --bg: linear-gradient(-45deg, #100018, #1e0030, #2a0050, #100018);
+  --text: #e8e8ff;
+  --card: rgba(30, 41, 59, 0.55);
+  --accent: #8b5cf6;
+  --muted: #c3c1ff;
+  --border: rgba(139, 92, 246, 0.25);
+  --radius: 16px;
 }
 
+/* Horror Theme */
+body.horror-theme {
+  --bg: linear-gradient(-45deg, #000000, #1a0000, #2a0000, #0a0000);
+  --text: #f8e8e8;
+  --card: rgba(60, 0, 0, 0.6);
+  --accent: #e50914;
+  --muted: #ffaaaa;
+  --border: rgba(255, 0, 0, 0.3);
+}
+
+/* =========================
+   GENERAL LAYOUT
+   ========================= */
 body {
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: "Inter", "Poppins", sans-serif;
   margin: 0;
   padding: 0;
+  min-height: 100vh;
+  font-family: "Inter", "Poppins", sans-serif;
+  background: var(--bg);
+  background-size: 400% 400%;
+  animation: gradientFlow 20s ease infinite;
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 header {
@@ -26,6 +51,21 @@ header {
 h1 {
   font-size: 1.8rem;
   margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+
+h1 span {
+  background: linear-gradient(270deg, var(--accent), #4f46e5, #0f172a);
+  background-size: 600% 600%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textGradient 8s ease infinite;
+}
+
+@keyframes textGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 p {
@@ -34,21 +74,26 @@ p {
 
 main {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
   padding: 1.5rem;
 }
 
+/* =========================
+   SECTIONS
+   ========================= */
 .section {
   background: var(--card);
   border-radius: var(--radius);
   padding: 1.2rem 1.5rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
 }
 
 .section:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 h2 {
@@ -75,6 +120,9 @@ li:hover {
   color: var(--accent);
 }
 
+/* =========================
+   FOOTER
+   ========================= */
 footer {
   text-align: center;
   padding: 1.2rem;
@@ -82,26 +130,58 @@ footer {
   font-size: 0.9rem;
 }
 
-/* Toggle button and checkbox styling */
+/* =========================
+   TOGGLE BUTTON
+   ========================= */
 .toggle-btn {
-  background: var(--accent);
-  color: var(--text);
+  background: linear-gradient(135deg, var(--accent), #4f46e5);
+  background-size: 400% 400%;
+  color: #fff;
   border: none;
   border-radius: var(--radius);
-  padding: 0.7rem 1.5rem;
+  padding: 0.8rem 1.5rem;
   margin: 1rem auto;
   display: block;
   font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
+  transition: all 0.3s ease;
+  animation: buttonGradient 8s ease infinite;
+}
+
+@keyframes buttonGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .toggle-btn:hover {
-  background: #b20610;
-  transform: scale(1.03);
+  filter: brightness(1.15);
+  transform: scale(1.05);
 }
 
+/* =========================
+   CHECKBOXES
+   ========================= */
 .movie-checkbox {
   margin-right: 10px;
   accent-color: var(--accent);
+}
+
+/* =========================
+   SCROLLBAR
+   ========================= */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--accent), #4f46e5);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
 }
