@@ -164,12 +164,6 @@ document.addEventListener("DOMContentLoaded", () => {
       "The Monkey (2025)": "https://www.imdb.com/title/tt15774462/"
     },
 
-    "Testin": {
-      "Movie 1 (2022)": "https://www.imdb.com/title/tt10954984/",
-      "Movie 2 (2018)": "https://www.imdb.com/title/tt2798920/",
-      "Movie 3 (2025)": "https://www.imdb.com/title/tt15774462/"
-    },
-
     "High-Concept / “Scary but Not Horror”": {
       "10 Cloverfield Lane (2016)": "https://www.imdb.com/title/tt1179933/",
       "Coherence (2013)": "https://www.imdb.com/title/tt2866360/",
