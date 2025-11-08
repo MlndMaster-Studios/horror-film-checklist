@@ -247,4 +247,29 @@ document.addEventListener("DOMContentLoaded", () => {
   renderList();
 });
 
+// === Theme Toggle ===
+const themeToggleBtn = document.getElementById("themeToggleBtn");
+
+// Load saved theme from localStorage
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "horror") document.body.classList.add("horror-theme");
+
+// Toggle on click
+themeToggleBtn.addEventListener("click", () => {
+  document.body.classList.toggle("horror-theme");
+
+  // Save preference
+  if (document.body.classList.contains("horror-theme")) {
+    localStorage.setItem("theme", "horror");
+    themeToggleBtn.textContent = "🌌 Switch to Brand Theme";
+  } else {
+    localStorage.setItem("theme", "brand");
+    themeToggleBtn.textContent = "💀 Switch to Horror Theme";
+  }
+});
+
+// Set initial button label
+themeToggleBtn.textContent = document.body.classList.contains("horror-theme")
+  ? "🌌 Switch to Brand Theme"
+  : "💀 Switch to Horror Theme";
 
